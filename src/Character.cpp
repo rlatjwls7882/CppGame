@@ -25,10 +25,8 @@ Character::Character(string name) {
     atk = 10;
     exp = 0;
     gold = 0;
-    defense = 0;
     plusHp = 10;
     plusAtk = 5;
-	plusDefense = 0;
     type = "[캐릭터] ";
 }
 
@@ -46,7 +44,7 @@ void Character::killMonster(Character*& target) {
 void Character::killMonster(Monster*& target) {
     exp += target->exp;
     gold += target->gold;
-    cout << "승리! 경험치" << target->exp << ", 골드 " << target->exp << " 획득!\n\n";
+    cout << "\n승리! 경험치" << target->exp << ", 골드 " << target->gold << " 획득!\n\n";
 
     while(exp >= 50) {
         exp -= 50;
@@ -76,7 +74,7 @@ bool Character::damageLog() const {
 }
 
 bool Character::takeDamage(int damage) {
-    hp = max(hp - max(damage-defense, 0), 0);
+    hp = max(hp - damage, 0);
     return damageLog();
 }
 
@@ -112,21 +110,21 @@ void Character::saveCharacter() {
         << maxHp << ' '
         << atk << ' '
         << exp << ' '
-        << gold << ' '
-        << defense << ' ';
+        << gold << ' ';
     ofs.close();
 }
 
 void Character::loadCharacter() {
     try {
         ifstream ifs("character.txt");
-        ifs >> type >> name >> level >> hp >> maxHp >> atk >> exp >> gold >> defense;
+        ifs >> type >> name >> level >> hp >> maxHp >> atk >> exp >> gold;
         type += ' ';
 
         if(ifs.fail()) {
             cout << "캐릭터 불러오기 실패!\n";
             throw runtime_error("파일 읽기 실패");
         }
+        cout << "캐릭터 불러오기 완료!\n";
     } catch(const exception&) {
         throw runtime_error("저장된 게임이 없습니다.");
     }
@@ -149,12 +147,4 @@ bool Character::useMedicine(int hp, int gold) {
     this->gold -= gold;
     this->hp = nextHp;
     return true;
-}
-
-bool Character::isWarrior() const {
-	return type.compare("[전사] ")==0;
-}
-
-bool Character::isWizard() const {
-	return type.compare("[마법사] ")==0;
 }

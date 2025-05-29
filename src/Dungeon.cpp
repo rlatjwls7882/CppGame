@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int getRandomInt(int min, int max) {
+int randInt(int min, int max) {
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> dist(min, max);
@@ -15,10 +15,10 @@ int getRandomInt(int min, int max) {
 }
 
 Dungeon::Dungeon() {
-    int cnt = getRandomInt(6, 19);
+    int cnt = randInt(6, 19);
     for(int i=0;i<cnt;i++) {
         Monster* monster;
-        switch(getRandomInt(0, 9)) {
+        switch(randInt(0, 9)) {
             case 0:
                 monster = new Goblin();
                 break;
@@ -123,8 +123,9 @@ void Dungeon::loadDungeon() {
     try {
         ifstream ifs("monster.txt");
         int cnt; ifs >> cnt;
+        monsters.clear();
 
-        for(int i=0;i<cnt;i++) {
+        while(cnt--) {
 			monsters.push_back(new Monster);
             monsters.back()->loadMonster(ifs);
         }

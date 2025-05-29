@@ -17,15 +17,13 @@ protected:
      * maxHp: 최대 체력
      * atk: 공격력
      * exp: 경험치
-     * defense: 방어력
      * plusHp: 레벨업 할때마다 오르는 체력
      * plusAtk: 레벨업 할때마다 오르는 공격력
-     * plusDefense: 레벨업 할때마다 오르는 방어력
      * gold: 소지 금액
      */
     string type;
     string name;
-    int level, hp, maxHp, atk, exp, defense, plusHp, plusAtk, plusDefense, gold;
+    int level, hp, maxHp, atk, exp, plusHp, plusAtk, gold;
 public:
     /**
      * 캐릭터 초기 설정
@@ -41,15 +39,13 @@ public:
     void killMonster(Monster*& target);
     virtual void levelUp();
     bool damageLog() const;
-    bool takeDamage(int damage);
+    virtual bool takeDamage(int damage);
     bool attack(Character*& target) const;
     bool attack(Monster*& target) const;
     bool isAlive() const;
     virtual void displayInfo() const;
-    void saveCharacter();
-    void loadCharacter();
+    virtual void saveCharacter();
+    virtual void loadCharacter();
     int getRandomInt(int min, int max);
     bool useMedicine(int hp, int gold);
-    bool isWarrior() const;
-    bool isWizard() const;
 };

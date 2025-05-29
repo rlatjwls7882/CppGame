@@ -6,6 +6,12 @@
 using namespace std;
 
 class Warrior : public Character {
+protected:
+	/**
+	 * defense: 방어력
+	 * plusDefense: 레벨업 할 때마다 오르는 방어력
+	 */
+	int defense, plusDefense;
 public:
     /**
      * 전사 초기 설정
@@ -18,6 +24,9 @@ public:
      */
     Warrior();
     Warrior(string name);
+	bool takeDamage(int damage) override;;
     void levelUp() override;
     void displayInfo() const override;
+	void saveCharacter() override;
+	void loadCharacter() override;
 };

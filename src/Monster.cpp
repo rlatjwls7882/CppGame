@@ -9,7 +9,6 @@ Monster::Monster() {
     hp = 50;
     atk = 10;
     exp = 20;
-    defense = 0;
     type = "[몬스터] ";
     name = "몬스터";
     gold = 10;

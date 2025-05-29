@@ -29,6 +29,11 @@ Warrior::Warrior(string name) {
     type = "[전사] ";
 }
 
+bool Warrior::takeDamage(int damage) {
+    hp = max(hp - max(damage-defense, 0), 0);
+    return damageLog();
+}
+
 void Warrior::levelUp() {
     cout << "레벨업: " << level << " -> " << level + 1 << '\n'
          << "최대 체력: " << maxHp << " -> " << maxHp + plusHp << '\n'
@@ -50,4 +55,34 @@ void Warrior::displayInfo() const {
          << "공격력: " << atk << "\n"
          << "방어력: " << defense << "\n"
          << "골드: " << gold << "\n\n";
+}
+
+void Warrior::saveCharacter() {
+    ofstream ofs("character.txt");
+    ofs << type
+        << name << ' '
+        << level << ' '
+        << hp << ' '
+        << maxHp << ' '
+        << atk << ' '
+        << exp << ' '
+        << gold << ' '
+        << defense << ' ';
+    ofs.close();
+}
+
+void Warrior::loadCharacter() {
+    try {
+        ifstream ifs("character.txt");
+        ifs >> type >> name >> level >> hp >> maxHp >> atk >> exp >> gold >> defense;
+        type += ' ';
+
+        if(ifs.fail()) {
+            cout << "캐릭터 불러오기 실패!\n";
+            throw runtime_error("파일 읽기 실패");
+        }
+        cout << "캐릭터 불러오기 완료!\n";
+    } catch(const exception&) {
+        throw runtime_error("저장된 게임이 없습니다.");
+    }
 }

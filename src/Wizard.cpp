@@ -49,3 +49,33 @@ void Wizard::displayInfo() const {
 		 << "방어력: " << defense << "\n"
          << "골드: " << gold << "\n\n";
 }
+
+void Wizard::saveCharacter() {
+    ofstream ofs("character.txt");
+    ofs << type
+        << name << ' '
+        << level << ' '
+        << hp << ' '
+        << maxHp << ' '
+        << atk << ' '
+        << exp << ' '
+        << gold << ' '
+        << defense << ' ';
+    ofs.close();
+}
+
+void Wizard::loadCharacter() {
+    try {
+        ifstream ifs("character.txt");
+        ifs >> type >> name >> level >> hp >> maxHp >> atk >> exp >> gold >> defense;
+        type += ' ';
+
+        if(ifs.fail()) {
+            cout << "캐릭터 불러오기 실패!\n";
+            throw runtime_error("파일 읽기 실패");
+        }
+        cout << "캐릭터 불러오기 완료!\n";
+    } catch(const exception&) {
+        throw runtime_error("저장된 게임이 없습니다.");
+    }
+}

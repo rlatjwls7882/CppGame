@@ -5,7 +5,7 @@
 
 class Store {
 private:
-    vector<Medicine> items;
+    vector<Medicine*> items;
 public:
     Store();
     void displayItems();

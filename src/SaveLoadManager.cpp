@@ -16,18 +16,19 @@ void SaveLoadManager::saveGame(Character*& character, Dungeon& dungeon) {
 
 void SaveLoadManager::loadGame(Character*& character, Dungeon& dungeon) {
     try {
-        character->loadCharacter();
-		dungeon.loadDungeon();
+        ifstream ifs("character.txt");
+        string type; ifs >> type;
 
-        if(character->isWarrior()) {
+        if(type.compare("[전사]")==0) {
             character = new Warrior();
-		} else if(character->isWizard()) {
+		} else if(type.compare("[마법사]")==0) {
 			character = new Wizard();
         }
+
         character->loadCharacter();
-        cout << "캐릭터 불러오기 완료!\n";
-        cout << "게임 불러오기 완료!\n";
+		dungeon.loadDungeon();
     } catch(const exception&) {
         throw runtime_error("저장된 게임이 없습니다.");
     }
+    cout << "게임 불러오기 완료!\n";
 }
