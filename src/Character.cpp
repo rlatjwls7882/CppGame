@@ -53,15 +53,14 @@ void Character::killMonster(Monster*& target) {
 }
 
 void Character::levelUp() {
-    int nextAtk = atk + plusAtk;
     cout << "레벨업: " << level << " -> " << level + 1 << '\n'
          << "최대 체력: " << maxHp << " -> " << maxHp + plusHp << '\n'
          << "체력: " << hp << " -> " << hp + plusHp << '\n'
-         << "공격력: " << atk << " -> " << nextAtk << '\n\n';
+         << "공격력: " << atk << " -> " << atk + plusAtk << "\n\n";
     level++;
     hp += plusHp;
     maxHp += plusHp;
-    atk = nextAtk;
+    atk += plusAtk;
 }
 
 bool Character::damageLog() const {
