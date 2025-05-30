@@ -5,15 +5,15 @@
 using namespace std;
 
     /**
-     * ¸¶¹ý»ç ÃÊ±â ¼³Á¤
-     * ·¹º§: 1
-     * Ã¼·Â: 60
-     * ÃÖ´ë Ã¼·Â: 60
-     * °ø°Ý·Â: 10
-     * ¹æ¾î·Â: -5
-     * °æÇèÄ¡: 0
+     * ë§ˆë²•ì‚¬ ì´ˆê¸° ì„¤ì •
+     * ë ˆë²¨: 1
+     * ì²´ë ¥: 60
+     * ìµœëŒ€ ì²´ë ¥: 60
+     * ê³µê²©ë ¥: 10
+     * ë°©ì–´ë ¥: -5
+     * ê²½í—˜ì¹˜: 0
      */
-Wizard::Wizard() : Wizard("¹«¸í") {}
+Wizard::Wizard() : Wizard("ë¬´ëª…") {}
 
 Wizard::Wizard(string name) {
     this->name = name;
@@ -26,14 +26,14 @@ Wizard::Wizard(string name) {
 	defense = -5;
     plusDefense = 0;
     gold = 0;
-    type = "[¸¶¹ý»ç] ";
+    type = "[ë§ˆë²•ì‚¬] ";
 }
 
 void Wizard::levelUp() {
-    cout << "·¹º§¾÷: " << level << " -> " << level + 1 << '\n'
-         << "ÃÖ´ë Ã¼·Â: " << maxHp << " -> " << maxHp + plusHp << '\n'
-         << "Ã¼·Â: " << hp << " -> " << hp + plusHp << '\n'
-         << "°ø°Ý·Â: " << atk << " -> " << atk + plusAtk << '\n\n';
+    cout << "ë ˆë²¨ì—…: " << level << " -> " << level + 1 << '\n'
+         << "ìµœëŒ€ ì²´ë ¥: " << maxHp << " -> " << maxHp + plusHp << '\n'
+         << "ì²´ë ¥: " << hp << " -> " << hp + plusHp << '\n'
+         << "ê³µê²©ë ¥: " << atk << " -> " << atk + plusAtk << "\n\n";
     level++;
     hp += plusHp;
     maxHp += plusHp;
@@ -42,12 +42,12 @@ void Wizard::levelUp() {
 
 void Wizard::displayInfo() const {
     cout << "------ " << type << name << " ------\n"
-         << "·¹º§: " << level << "\n"
-         << "°æÇèÄ¡: " << exp << " / 50\n"
-         << "Ã¼·Â: " << hp << " / " << maxHp << "\n"
-         << "°ø°Ý·Â: " << atk << "\n"
-		 << "¹æ¾î·Â: " << defense << "\n"
-         << "°ñµå: " << gold << "\n\n";
+         << "ë ˆë²¨: " << level << "\n"
+         << "ê²½í—˜ì¹˜: " << exp << " / 50\n"
+         << "ì²´ë ¥: " << hp << " / " << maxHp << "\n"
+         << "ê³µê²©ë ¥: " << atk << "\n"
+		 << "ë°©ì–´ë ¥: " << defense << "\n"
+         << "ê³¨ë“œ: " << gold << "\n\n";
 }
 
 void Wizard::saveCharacter() {
@@ -71,11 +71,11 @@ void Wizard::loadCharacter() {
         type += ' ';
 
         if(ifs.fail()) {
-            cout << "Ä³¸¯ÅÍ ºÒ·¯¿À±â ½ÇÆÐ!\n";
-            throw runtime_error("ÆÄÀÏ ÀÐ±â ½ÇÆÐ");
+            cout << "ìºë¦­í„° ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨!\n";
+            throw runtime_error("íŒŒì¼ ì½ê¸° ì‹¤íŒ¨");
         }
-        cout << "Ä³¸¯ÅÍ ºÒ·¯¿À±â ¿Ï·á!\n";
+        cout << "ìºë¦­í„° ë¶ˆëŸ¬ì˜¤ê¸° ì™„ë£Œ!\n";
     } catch(const exception&) {
-        throw runtime_error("ÀúÀåµÈ °ÔÀÓÀÌ ¾ø½À´Ï´Ù.");
+        throw runtime_error("ì €ìž¥ëœ ê²Œìž„ì´ ì—†ìŠµë‹ˆë‹¤.");
     }
 }
