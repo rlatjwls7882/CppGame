@@ -9,14 +9,14 @@
 using namespace std;
 
    /**
-    * Ä³¸¯ÅÍ ÃÊ±â ¼³Á¤
-    * ·¹º§: 1
-    * Ã¼·Â: 100
-    * ÃÖ´ë Ã¼·Â: 100
-    * °ø°Ý·Â: 10
-    * °æÇèÄ¡: 0
+    * ìºë¦­í„° ì´ˆê¸° ì„¤ì •
+    * ë ˆë²¨: 1
+    * ì²´ë ¥: 100
+    * ìµœëŒ€ ì²´ë ¥: 100
+    * ê³µê²©ë ¥: 10
+    * ê²½í—˜ì¹˜: 0
     */
-Character::Character() : Character("¹«¸í") {}
+Character::Character() : Character("ë¬´ëª…") {}
 
 Character::Character(string name) {
     this->name = name;
@@ -27,13 +27,13 @@ Character::Character(string name) {
     gold = 0;
     plusHp = 10;
     plusAtk = 5;
-    type = "[Ä³¸¯ÅÍ] ";
+    type = "[ìºë¦­í„°] ";
 }
 
 void Character::killMonster(Character*& target) {
     exp += target->exp;
     gold += target->gold;
-    cout << "½Â¸®! °æÇèÄ¡" << target->exp << ", °ñµå " << target->exp << " È¹µæ!\n\n";
+    cout << "ìŠ¹ë¦¬! ê²½í—˜ì¹˜" << target->exp << ", ê³¨ë“œ " << target->exp << " íšë“!\n\n";
 
     while(exp >= 50) {
         exp -= 50;
@@ -44,7 +44,7 @@ void Character::killMonster(Character*& target) {
 void Character::killMonster(Monster*& target) {
     exp += target->exp;
     gold += target->gold;
-    cout << "\n½Â¸®! °æÇèÄ¡" << target->exp << ", °ñµå " << target->gold << " È¹µæ!\n\n";
+    cout << "\nìŠ¹ë¦¬! ê²½í—˜ì¹˜" << target->exp << ", ê³¨ë“œ " << target->gold << " íšë“!\n\n";
 
     while(exp >= 50) {
         exp -= 50;
@@ -53,21 +53,22 @@ void Character::killMonster(Monster*& target) {
 }
 
 void Character::levelUp() {
-    cout << "·¹º§¾÷: " << level << " -> " << level + 1 << '\n'
-         << "ÃÖ´ë Ã¼·Â: " << maxHp << " -> " << maxHp + plusHp << '\n'
-         << "Ã¼·Â: " << hp << " -> " << hp + plusHp << '\n'
-         << "°ø°Ý·Â: " << atk << " -> " << atk + plusAtk << '\n\n';
+    int nextAtk = atk + plusAtk;
+    cout << "ë ˆë²¨ì—…: " << level << " -> " << level + 1 << '\n'
+         << "ìµœëŒ€ ì²´ë ¥: " << maxHp << " -> " << maxHp + plusHp << '\n'
+         << "ì²´ë ¥: " << hp << " -> " << hp + plusHp << '\n'
+         << "ê³µê²©ë ¥: " << atk << " -> " << nextAtk << '\n\n';
     level++;
     hp += plusHp;
     maxHp += plusHp;
-    atk += plusAtk;
+    atk = nextAtk;
 }
 
 bool Character::damageLog() const {
-    cout << type << name << "(Àº/´Â) °ø°ÝÀ» ¹Þ¾Ò´Ù.\n"
-         << type << name << "ÀÇ Ã¼·ÂÀÌ " << hp << "·Î °¨¼ÒÇß´Ù.\n";
+    cout << type << name << "(ì€/ëŠ”) ê³µê²©ì„ ë°›ì•˜ë‹¤.\n"
+         << type << name << "ì˜ ì²´ë ¥ì´ " << hp << "ë¡œ ê°ì†Œí–ˆë‹¤.\n";
     if(!isAlive()) {
-        cout << type << name << "(Àº/´Â) »ç¸ÁÇß´Ù.\n";
+        cout << type << name << "(ì€/ëŠ”) ì‚¬ë§í–ˆë‹¤.\n";
         return false;
     }
     return true;
@@ -79,12 +80,12 @@ bool Character::takeDamage(int damage) {
 }
 
 bool Character::attack(Character*& target) const {
-    cout << type << name << "ÀÇ °ø°Ý!\n";
+    cout << type << name << "ì˜ ê³µê²©!\n";
     return target->takeDamage(atk);
 }
 
 bool Character::attack(Monster*& target) const {
-    cout << type << name << "ÀÇ °ø°Ý!\n";
+    cout << type << name << "ì˜ ê³µê²©!\n";
     return target->takeDamage(atk);
 }
 
@@ -94,11 +95,11 @@ bool Character::isAlive() const {
 
 void Character::displayInfo() const {
     cout << "------ " << type << name << " ------\n"
-         << "·¹º§: " << level << "\n"
-         << "°æÇèÄ¡: " << exp << " / 50\n"
-         << "Ã¼·Â: " << hp << " / " << maxHp << "\n"
-         << "°ø°Ý·Â: " << atk << "\n"
-         << "°ñµå: " << gold << "\n\n";
+         << "ë ˆë²¨: " << level << "\n"
+         << "ê²½í—˜ì¹˜: " << exp << " / 50\n"
+         << "ì²´ë ¥: " << hp << " / " << maxHp << "\n"
+         << "ê³µê²©ë ¥: " << atk << "\n"
+         << "ê³¨ë“œ: " << gold << "\n\n";
 }
 
 void Character::saveCharacter() {
@@ -121,12 +122,12 @@ void Character::loadCharacter() {
         type += ' ';
 
         if(ifs.fail()) {
-            cout << "Ä³¸¯ÅÍ ºÒ·¯¿À±â ½ÇÆÐ!\n";
-            throw runtime_error("ÆÄÀÏ ÀÐ±â ½ÇÆÐ");
+            cout << "ìºë¦­í„° ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨!\n";
+            throw runtime_error("íŒŒì¼ ì½ê¸° ì‹¤íŒ¨");
         }
-        cout << "Ä³¸¯ÅÍ ºÒ·¯¿À±â ¿Ï·á!\n";
+        cout << "ìºë¦­í„° ë¶ˆëŸ¬ì˜¤ê¸° ì™„ë£Œ!\n";
     } catch(const exception&) {
-        throw runtime_error("ÀúÀåµÈ °ÔÀÓÀÌ ¾ø½À´Ï´Ù.");
+        throw runtime_error("ì €ìž¥ëœ ê²Œìž„ì´ ì—†ìŠµë‹ˆë‹¤.");
     }
 }
 
@@ -136,13 +137,13 @@ int Character::getRandomInt(int min, int max) {
 
 bool Character::useMedicine(int hp, int gold) {
     if(this->gold < gold) {
-        cout << "°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù.\n\n";
+        cout << "ê³¨ë“œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.\n\n";
         return false;
     }
 
     int nextHp = min(this->hp + hp, maxHp);
-    cout << type << name << "ÀÌ(°¡) È¸º¹ ¹°¾àÀ» »ç¿ëÇß½À´Ï´Ù.\n"
-         << "Ã¼·ÂÀÌ " << this->hp << "¿¡¼­ " << nextHp << " ·Î º¯È­Çß½À´Ï´Ù.\n\n";
+    cout << type << name << "ì´(ê°€) íšŒë³µ ë¬¼ì•½ì„ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤.\n"
+         << "ì²´ë ¥ì´ " << this->hp << "ì—ì„œ " << nextHp << " ë¡œ ë³€í™”í–ˆìŠµë‹ˆë‹¤.\n\n";
 	
     this->gold -= gold;
     this->hp = nextHp;
